@@ -136,6 +136,8 @@
                             <div class="col-lg-6">
                               <input type="email" name="email" value="<?php echo $email;?>" class="form-control" id="c-name" placeholder=" ">
                             </div>
+
+                            
                           </div>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Role</label>
