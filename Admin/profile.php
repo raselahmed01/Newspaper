@@ -15,7 +15,7 @@
     $query=mysqli_query($conn,"SELECT * FROM users WHERE id='$user_id'");
 
     while ($row=mysqli_fetch_array($query)) {
-      $user_id=$row['id'];
+      $id=$row['id'];
       $username=$row['username'];
       $first_name=$row['first_name'];
       $last_name=$row['last_name'];
@@ -26,6 +26,8 @@
 
     }
   }
+
+  
 
 ?>
     <!--main content start-->
@@ -49,8 +51,14 @@
                 <div class="col-lg-2 col-sm-2">
                    <h4><?php echo $user_obj->getUserName();?></h4>
                   <div class="follow-ava">
-                    <img src="../<?php echo $user_obj->getUserpic();?>" alt="">
+                    <img src="<?php echo $user_obj->getUserpic();?>" alt="">
                   </div>
+
+                  <form method="POST" action="profile_edit.php?user_id=<?php echo $id;?>" enctype="multipart/form-data">
+                    <input type="file" name="pro_pic">
+                    <input type="submit" name="upload" class="btn btn-primary btn-sm" value="Upload">
+                  </form>
+                  <br><br>
                   <h6><?php echo $user_obj->getUserRole(); ?></h6>
                 </div>
                 
@@ -118,7 +126,7 @@
                         <h1> Profile Info</h1>
 
 
-                        <form class="form-horizontal" role="form" method="post" action="">
+                        <form class="form-horizontal" role="form" method="POST" action="profile_edit.php?user_id=<?php echo $id; ?>">
                           <div class="form-group">
                             <label class="col-lg-2 control-label">First Name</label>
                             <div class="col-lg-6">
@@ -139,22 +147,17 @@
 
                             
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Role</label>
-                            <div class="col-lg-6">
-                              <input type="text" name="role" value="<?php echo $role;?>"class="form-control" id="b-day" placeholder=" ">
-                            </div>
-                          </div>
+                          
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Password</label>
                             <div class="col-lg-6">
-                              <input type="password" name="pwd" value="<?php echo $password;?>" class="form-control" id="occupation" placeholder=" ">
+                              <input type="password" name="pwd"  class="form-control" id="occupation" placeholder=" ">
                             </div>
                           </div>
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" name="update" class="btn btn-primary">Update</button>
+                              <button type="submit" name="updatedata" class="btn btn-primary">Update</button>
                               <button type="button" class="btn btn-danger">Cancel</button>
                             </div>
                           </div>
