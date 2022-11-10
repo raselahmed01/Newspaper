@@ -9,6 +9,20 @@
             </a>
           </li>
 
+          <li class="active">
+            <a class="" href="addcategory.php">
+              
+                <span>Add Category</span>
+            </a>
+          </li>
+
+           <li class="active">
+            <a class="" href="category.php">
+              
+                <span>Category</span>
+            </a>
+          </li>
+
           <li >
             <a class="" href="profile.php?user_id=<?php echo $user_obj->getUserId();?>">
               

@@ -2,6 +2,7 @@
 
 include '../config/config.php';
 include '../classes/User.php';
+include '../classes/Category.php';
 
 if(isset($_SESSION['admin_user'])){
 
@@ -14,6 +15,7 @@ else{
 
 
 $user_obj =new User($conn,$user);
+$cat_obj =new Category($conn,$user);
 
           
           

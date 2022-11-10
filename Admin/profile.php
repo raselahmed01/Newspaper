@@ -151,7 +151,7 @@
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Password</label>
                             <div class="col-lg-6">
-                              <input type="password" name="pwd"  class="form-control" id="occupation" placeholder=" ">
+                              <input type="password" name="pwd"  class="form-control"  placeholder=" ">
                             </div>
                           </div>
 
