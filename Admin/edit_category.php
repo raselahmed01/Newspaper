@@ -7,15 +7,30 @@
     <!--sidebar start-->
 <?php include 'pages/side_bar.php'; ?>
     <!--sidebar end-->
-<?php 
+<?php
 
-  if(isset($_POST['save'])){
+  $role = $user_obj->getUserRole();
 
-    $category=$_POST['cat_title'];
+  if(isset($_GET['c_id']) && $_GET['c_id']!=="" && $role="Admin"){
 
-    $cat_obj->addCategory($category);
+    $cat_id=$_GET['c_id'];
+    $query=mysqli_query($conn,"SELECT * FROM category WHERE id='$cat_id'");
+
+    $row=mysqli_fetch_array($query);
+
+    if (isset($_POST['c_update'])) {
+    $cat_title=$_POST['cat_title'];
+
+    $cat_obj->updateCategory($cat_id,$cat_title);
+
     header("Location: category.php?message=Category_Updated");
   }
+}
+
+    
+
+
+  
 ?>
     <!--main content start-->
     <section id="main-content">
@@ -26,19 +41,19 @@
             <!-- <h3 class="page-header"><i class="fa fa-category"></i> Dashboard</h3> -->
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-              <li></i>Add Category</li>
+              <li></i>Update Category</li>
             </ol>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-9 col-md-12">
-            <form class="form-horizontal " action="" autocomplete="false" method="post">
+            <form class="form-horizontal " action="" autocomplete="false" method="POST">
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Category</label>
                     <div class="col-sm-10">
-                      <input type="text" name="cat_title"class="form-control">
+                      <input type="text" name="cat_title" value="<?php echo $row['cat_title'];?>"class="form-control">
                       <br>
-                      <input type="submit" name="save" value="Submit" class="btn btn-primary">
+                      <input type="submit" name="c_update" value="Update" class="btn btn-primary">
                     </div>
                   </div>
             </form>

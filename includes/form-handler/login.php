@@ -7,6 +7,8 @@ if(isset($_POST['login'])){
 	$email=$_POST['email'];
 	$pwd=$_POST['pwd'];
 
+
+
 	$query=mysqli_query($mysql,"SELECT * FROM users WHERE email='$email'");
 
 	$row=mysqli_fetch_array($query);
@@ -16,7 +18,7 @@ if(isset($_POST['login'])){
 	$db_pwd=$row['password'];
 
 	
-	$rehashpwd=md5($pwd);
+	echo $rehashpwd=md5($pwd);die();
 
 	if($db_email===$email && $db_pwd===$rehashpwd){
 

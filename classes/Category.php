@@ -36,16 +36,16 @@ class Category{
 
 		while($row=mysqli_fetch_array($query)){
 
-			$cate_id=$row['id'];
+			$cat_id=$row['id'];
 			$cat_title=$row['cat_title'];
 
 			if($role==='Admin'){
 
 			$str.="<tr>".
-					"<td>{$cate_id}</td>".
+					"<td>{$cat_id}</td>".
 					"<td>{$cat_title}</td>".
-					"<td><a href='#' class='btn btn-primary btn-sm'>Edit<a>".
-					"<td><a href='#' class='btn btn-danger btn-sm'>Delete<a>".
+					"<td><a href='edit_category.php?c_id={$cat_id}' class='btn btn-primary btn-sm'>Edit<a>".
+					"<td><a href='category.php?c_id={$cat_id}' class='btn btn-danger btn-sm'>Delete<a>".
 					"</tr>";
 			}else{
 				$str.="<tr>".
@@ -59,6 +59,28 @@ class Category{
 		
 		echo $str;
 
+	}
+
+	public function updateCategory($id,$cat_title){
+
+		$query=mysqli_query($this->conn,"UPDATE category SET cat_title='$cat_title' WHERE id='$id'");
+
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function deleteCategory($cat_id){
+
+		$query=mysqli_query($this->conn,"DELETE FROM category WHERE id='$cat_id'");
+
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 

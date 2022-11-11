@@ -8,14 +8,15 @@ if(isset($_POST['updatedata'])){
 	 $f_name=$_POST['firstname'];
    	 $l_name=$_POST['lastname'];
    	 $email=$_POST['email'];
-   	 $password=md5($_POST['pwd']);
+   	 
+   	 
    	 $username=$f_name . " " .$l_name;
 
-   	 $sql=mysqli_query($conn,"UPDATE users SET username='$username',first_name='$f_name',last_name='$l_name',email='$email',password='$password' WHERE id='$id'");
+   	 $password=trim(md5($_POST['pwd']));
 
-    $_SESSION['admin_user']=$username;
-
-    header("Location: profile.php?user_id=$id");
+	$sql=mysqli_query($conn,"UPDATE users SET username='$username',first_name='$f_name',last_name='$l_name',email='$email', WHERE id='$id'");
+	$_SESSION['admin_user']=$username;
+	header("Location: profile.php?user_id=$id");
 }
 
 if (isset($_POST['upload']) && isset($_FILES['pro_pic'])) {

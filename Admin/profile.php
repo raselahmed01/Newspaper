@@ -148,12 +148,12 @@
                             
                           </div>
                           
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label class="col-lg-2 control-label">Password</label>
                             <div class="col-lg-6">
-                              <input type="password" name="pwd"  class="form-control"  placeholder=" ">
+                              <input type="password" name="pwd"  placeholder=" Password" class="form-control">
                             </div>
-                          </div>
+                          </div> -->
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
