@@ -9,26 +9,38 @@
             </a>
           </li>
 
-          <li class="active">
-            <a class="" href="addcategory.php">
-              
-                <span>Add Category</span>
+          <li >
+            <a class="" href="profile.php?user_id=<?php echo $user_obj->getUserId();?>">
+              <i class='fa fa-user'></i>
+                <span>Profile</span>
             </a>
           </li>
 
-           <li class="active">
+          <?php 
+            $role=$user_obj->getUserRole();
+            if($role==="Admin"):
+          ?>
+          <li>
+            <a  href='addcategory.php'>
+              <i class='fa fa-suitcase'></i>
+                <span>Add Category</span>
+            </a>
+          </li>
+        <?php endif;?>
+           <li >
             <a class="" href="category.php">
-              
+              <i class='fa fa-folder'></i>
                 <span>Category</span>
             </a>
           </li>
 
           <li >
-            <a class="" href="profile.php?user_id=<?php echo $user_obj->getUserId();?>">
+            <a class="" href="add_news.php">
               
-                <span>Profile</span>
+                <span>Add News</span>
             </a>
           </li>
+          
           
           
 
