@@ -55,12 +55,13 @@
 
                       $category=$cat_obj->getAdminCategory();
 
-                      if (isset($_GET['c_id']) && $_GET['c_id']!=="" && $role=="Admin"){
+                      if (isset($_GET['c_id']) && $_GET['c_id']!=="" && $role==="Admin"){
                         
                         $cat_id=$_GET['c_id'];
                         $cat_obj->deleteCategory($cat_id);
                         header("Location: category.php?message=Category_Deleted");
                       }
+
                     ?>
                     
                   </tr>

@@ -49,7 +49,7 @@ class Category{
 					"</tr>";
 			}else{
 				$str.="<tr>".
-					"<td>{$cate_id}</td>".
+					"<td>{$cat_id}</td>".
 					"<td>{$cat_title}</td>".
 					"</tr>";
 			}

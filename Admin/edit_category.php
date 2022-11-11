@@ -11,7 +11,7 @@
 
   $role = $user_obj->getUserRole();
 
-  if(isset($_GET['c_id']) && $_GET['c_id']!=="" && $role="Admin"){
+  if(isset($_GET['c_id']) && $_GET['c_id']!=="" && $role==="Admin"){
 
     $cat_id=$_GET['c_id'];
     $query=mysqli_query($conn,"SELECT * FROM category WHERE id='$cat_id'");
@@ -25,7 +25,10 @@
 
     header("Location: category.php?message=Category_Updated");
   }
+}else{
+  header("Location: category.php");
 }
+
 
     
 
