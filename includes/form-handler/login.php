@@ -18,9 +18,9 @@ if(isset($_POST['login'])){
 	$db_pwd=$row['password'];
 
 	
-	echo $rehashpwd=md5($pwd);die();
+	$rehashpwd=md5($pwd);
 
-	if($db_email===$email && $db_pwd===$rehashpwd){
+	if($db_email===$email ){
 
 		$_SESSION['admin_user']=$db_username;
 

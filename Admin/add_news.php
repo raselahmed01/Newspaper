@@ -26,13 +26,59 @@
           </div>
         </div>
         <div class="row">
+
+            <?php 
+
+              if(isset($_POST['save'])&& $_FILES['n_image']!==""){
+
+                $imgname=$_FILES['n_image']['name'];
+                $imgtmpname=$_FILES['n_image']['tmp_name'];
+                $imgsize=$_FILES['n_image']['size'];
+                $imgext=explode('.', $imgname);
+                $imgactext=strtolower(end($imgext));
+                $allowed=array('jpef','jpg','gif','png');
+
+                if(!in_array($imgactext, $allowed)){
+
+                    header('Location: add_news.php?message= File_type_not_allowed');
+
+                }else{
+                  if($imgsize > 10000000){
+
+                    header('Location: add_news.php?message= File_is_too_large');
+                     }else{
+
+                      $imgnewname=uniqid('',true). '.' .$imgactext;
+                      $dir="news_images/";
+
+                      $targetfile=$dir . basename($imgnewname);
+
+                      move_uploaded_file($imgtmpname, $targetfile);
+
+                      $news_obj->addNews($_POST['title'],$_POST['n_content'],$_POST['n_category'],$_POST['n_status'],$_POST['n_type'],$_POST['n_tag'],$targetfile);
+
+                      echo "<script> alert('News Added Succesfully ');</script>";
+
+
+
+
+                     }
+                }
+
+                  
+              }
+
+
+            ?>
           <div class="col-lg-9 col-md-12">
-            <form class="form-horizontal " action="" autocomplete="false" method="POST">
+            <form class="form-horizontal " action="" autocomplete="false" method="POST" enctype="multipart/form-data" >
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Title</label>
+                    
                     <div class="col-sm-8">
-                      <input type="text" name="title" placeholder="News Title" class="form-control">
-                    </div>
+                      <input type="text" id="title" name="title" placeholder="News Title" class="form-control">
+                    </div>Left
+                    <span class="input-group" id="left">70 </span>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Content</label>
@@ -45,18 +91,25 @@
                     <label class="col-sm-2 control-label">Category</label>
                     <div class="col-sm-8">
                       <select class="form-control" name="n_category">
-                        <option>Category 1</option>
-                        <option>Category 1</option>
-                        <option>Category 1</option>
+                        <option> Select Category</option>
+                      
+                      <?php 
+                        $query=mysqli_query($conn,"SELECT DISTINCT * FROM category ORDER BY cat_title ASC");
+                        while($row=mysqli_fetch_array($query)){
+                          $cat_title=$row['cat_title'];
+                          echo "<option value='{$cat_title}'> $cat_title</option>";
+                        }
+                      ?>
                       </select>
+                      
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Status</label>
                     <div class="col-sm-8">
                       <select class="form-control" name="n_status">
-                        <option>Published</option>
-                        <option>Draft</option>
+                        <option value="Published">Published</option>
+                        <option value="Draft">Draft</option>
                       </select>
                     </div>
                   </div>
@@ -65,13 +118,13 @@
                     <label class="col-sm-2 control-label">Types</label>
                     <div class="col-sm-8">
                       <select class="form-control" name="n_type">
-                        <option>Breaking News</option>
-                        <option>Casual News</option>
+                        <option value="Breaking News">Breaking News</option>
+                        <option value="Casual News">Casual News</option>
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label">News Image</label>
+                    <label class="col-sm-2 control-label">News Tags</label>
                     <div class="col-sm-8">
                       <input type="text" name="n_tag" class="form-control" placeholder="News Tags(Separated By Comma) ">
                     </div>
@@ -79,7 +132,8 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">News Image</label>
                     <div class="col-sm-8">
-                      <input type="file" name="n_image" class="form-control">
+                      <input type="file" name="n_image" class="form-control" onchange="readURL(this)">
+                      <img src="#" alt="Uploaded image to be displayed here" height="150px"width="200px" id="n_img">
                     </div>
                   </div>
                   <div class="form-group">
@@ -119,6 +173,38 @@
     <!--main content end-->
   </section>
   <!-- container section start -->
+<script >
 
+  var title=document.querySelector("#title");
+  var max=70;
+  title.addEventListener('keyup',function(){
+
+    var left=document.getElementById('left');
+
+    if(title.value.length > max){
+      title.value=title.value.substring(0,max);
+      title.style.border="2px solid red";
+    }else{
+      left.textContent=max -title.value.length;
+      title.style.border="2px solid green";
+
+    }
+
+  });
+
+  function readURL(input){
+    if(input.files && input.files[0]){
+    let reader=new FileReader();
+
+    reader.onload=function(e){
+
+      $("#n_img").attr('src',e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+</script>
   <!-- javascripts -->
   <?php include 'pages/footer.php'; ?>
