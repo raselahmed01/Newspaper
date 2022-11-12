@@ -1,4 +1,12 @@
-<?php include_once 'config/config.php'; ?>
+<?php 
+
+include_once 'config/config.php'; 
+$user=$_SESSION['admin_user'];
+include 'classes/Category.php';
+include 'classes/User.php';
+
+$cat_obj =new Category($conn,$user);
+?>
 <!DOCTYPE html>
 <html lang="en">
 

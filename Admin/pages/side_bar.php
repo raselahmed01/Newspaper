@@ -34,12 +34,19 @@
             </a>
           </li>
 
+           <?php 
+            $role=$user_obj->getUserRole();
+            if($role==="Admin"):
+          ?>
           <li >
             <a class="" href="add_news.php">
-              
+              <i class='fa fa-globe'></i>
                 <span>Add News</span>
             </a>
           </li>
+        <?php endif;?>
+
+          
           
           
           

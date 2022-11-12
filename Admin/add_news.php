@@ -58,10 +58,6 @@
                       $news_obj->addNews($_POST['title'],$_POST['n_content'],$_POST['n_category'],$_POST['n_status'],$_POST['n_type'],$_POST['n_tag'],$targetfile);
 
                       echo "<script> alert('News Added Succesfully ');</script>";
-
-
-
-
                      }
                 }
 

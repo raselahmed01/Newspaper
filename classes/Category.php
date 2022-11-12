@@ -84,6 +84,22 @@ class Category{
 	}
 
 
+	public function getAllCategory(){
+
+		$query=mysqli_query($this->conn,"SELECT * FROM category ORDER BY cat_title ASC");
+		$str="";
+		while($row=mysqli_fetch_array($query)){
+
+			$c_id=$row['id'];
+			$c_title=$row['cat_title'];
+
+			$str.="<li><a href='category.php?c_id={$c_id}'>$c_title</a></li>";
+		}
+
+		echo $str;
+	}
+
+
 
 
 
