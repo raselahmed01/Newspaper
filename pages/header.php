@@ -4,8 +4,10 @@ include_once 'config/config.php';
 $user=$_SESSION['admin_user'];
 include 'classes/Category.php';
 include 'classes/User.php';
+include 'classes/News.php';
 
 $cat_obj =new Category($conn,$user);
+$news_obj =new News($conn,$user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
