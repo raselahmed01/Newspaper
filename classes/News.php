@@ -67,7 +67,7 @@
 				$endcount=new DateTime($date_time_now);
 				$interval=$startcount->diff($endcount);
 
-				if($interval->h <=40){
+				if($interval->h <=40 && $interval->d <=1){
 
 					$rand=rand(5,7);
 
@@ -99,7 +99,51 @@
 			echo $str;
 		}
 
+
+
+	public function getFeatureNews(){
+
+		$query=mysqli_query($this->connection,"SELECT * FROM news ORDER BY rand() LIMIT 5");
+
+		$str="";
+		while ($row=mysqli_fetch_array($query)){
+
+			$n_cat_id=	$row['id'];
+			$n_title=	substr($row['title'],0). "..";
+			$n_cat=		$row['n_category'];
+			$n_img	=	$row['n_image'];
+
+			$added_date=strtotime($row['added_date']);
+
+			$custom_time=date('h : s A',$added_date);
+			$custom_date=date('M  d',$added_date);
+
+			$str.="<div class='single-blog-post small-featured-post d-flex'>
+				        <div class='post-thumb'>
+				            <a href='#'><img src='Admin/{$n_img}' ></a>
+				        </div>
+				        <div class='post-data'>
+				            <a href='#'class='post-catagory'>{$n_cat}</a>
+				            <div class='post-meta'>
+				                <a href='#' class='post-title'>
+				                    <h6>{$n_title}</h6>
+				                </a>
+				                <p class='post-date'><span>{$custom_time}</span> | <span>{$custom_date}</span></p>
+				            </div>
+				        </div>
+				    </div>";
+		}
+
+		echo $str;
 	}
+
+
+
+
+
+
+
+}//End of News Class
 
 
 ?>

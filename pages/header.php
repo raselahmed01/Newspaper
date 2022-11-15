@@ -1,7 +1,7 @@
 <?php 
 
 include_once 'config/config.php'; 
-$user=$_SESSION['admin_user'];
+$user=(isset($_SESSION['admin_user']))?$_SESSION['admin_user']:"user";
 include 'classes/Category.php';
 include 'classes/User.php';
 include 'classes/News.php';
